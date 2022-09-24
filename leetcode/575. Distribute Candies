@@ -1,0 +1,18 @@
+class Solution {
+public:
+    int distributeCandies(vector<int>& candyType) {
+        int s=candyType.size();
+        int n=s/2;
+        int index=1;
+        sort(candyType.begin(),candyType.end());
+        int temp=candyType[0];
+        while(n!=1&&index!=s){
+            if(candyType[index]!=temp){
+                temp=candyType[index];
+                n--;
+            }
+            index++;
+        }
+        return s/2-n+1;
+    }
+};

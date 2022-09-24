@@ -1,0 +1,12 @@
+class Solution {
+public:
+    int maxCoins(vector<int>& piles) {
+        sort(piles.begin(),piles.end());
+        int sum=0;
+        int n=piles.size()/3;
+        for(int i=0;i<n;i++){
+            sum+=piles[n+2*i];
+        }
+        return sum;
+    }
+};

@@ -1,0 +1,32 @@
+class Solution {
+public:
+    bool isHappy(int n) {
+        int store=n;
+        int sum=0;
+        vector<int>s;
+        while(sum!=1){
+            sum=0;
+            int temp1=n,temp2;
+
+            while(temp1/10!=0){
+                temp1=n/10;
+                temp2=n%10;
+                n=temp1;
+                sum+=temp2*temp2;
+            }  
+            temp2=n%10;
+            sum+=temp2*temp2;
+            n=sum;
+            
+            for(int i=0;i<s.size();i++){
+                if(n==s[i]){
+                    return 0;
+                }
+            
+            } s.push_back(n);
+        }
+        
+        
+        return 1;
+    }
+};

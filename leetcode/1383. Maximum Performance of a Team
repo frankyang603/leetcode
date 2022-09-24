@@ -1,0 +1,74 @@
+class Solution {
+public:
+    int maxPerformance(int n, vector<int>& speed, vector<int>& efficiency, int k) {
+        priority_queue<pair<long long int, long long int>, vector<pair<long long int, long long int> > > pq;
+        long long int cal=0;
+        long long int r=0;
+        long long int h=(int)1e9+7;
+        for(int i=0;i<efficiency.size();i++){
+            pair<long long int,long long int >temp(efficiency[i],speed[i]);
+            pq.push(temp);
+        }
+        priority_queue<pair<long long int, long long int>, vector<pair<long long int, long long int> >, greater<pair<long long int, long long int> > > out;
+        long long int low;
+        for(int i=0;i<k;i++){
+            long long int a=pq.top().first,b=pq.top().second;
+            pair<long long int,long long int >temp(b,a);
+            cal=cal+b;
+            out.push(temp);
+            low=a;
+            pq.pop();
+            if(cal*low>r){
+                r=cal*low;
+            }
+        }
+        // cout<<r<<"\n";
+        while(!pq.empty()){
+            long long int a=pq.top().first;
+            long long int b=pq.top().second;
+            long long int c=out.top().first;
+            pair<long long int,long long int >temp(b,a);
+            // long long int y=cal*low;
+            // long long int p=(cal-c+b)*a;
+            // cout<<y<<" "<<p<<"\n";
+            if(b>c){
+                cal=cal-c+b;
+                low=a;
+                out.pop();
+                out.push(temp);
+            }
+            if(cal*low>r){
+                r=cal*low;
+            }
+            pq.pop();
+        }
+        // long long int min=out.top().second;
+        // priority_queue<pair<long long int,long long  int>, vector<pair<long long int,long long  int> >, greater<pair<long long int, long long int> > > outt;
+        // cal=0;
+        // while(!out.empty()){
+        //     pair<long long int,long long int >temp(out.top().second,out.top().first);
+        //     cal+=out.top().first;
+        //     if(out.top().second<min){
+        //         min=out.top().second;
+        //     }
+        //     out.pop();
+        //     outt.push(temp);
+        // }
+        // cout<<low<<" "<<low;
+        // if(min*cal>r){
+        //     r=min*cal;
+        // }
+        // while(!outt.empty()){
+        //     cal-=outt.top().second;
+        //     // cout<<outt.top().first<<"\n";
+        //     outt.pop();
+        //     long long int tt=outt.top().first*cal;
+        //     if(tt>r){
+        //         cout<<tt<<"\n"<<"\n";
+        //         r=tt;
+        //     }
+        // }
+        r=r%h;
+        return r;
+    }
+};

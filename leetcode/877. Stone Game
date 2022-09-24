@@ -1,0 +1,59 @@
+class Solution {
+public:
+    bool stoneGame(vector<int>& stoneValue) {
+        vector<int> store;
+        for(int i=0;i<10000*stoneValue.size();i++){
+            store.push_back(0);
+        }
+        int h=take(0,stoneValue.size()-1,store,0,stoneValue);
+        
+        if(h==0){
+            return "Tie";
+        }
+        if(h>0){
+            return "Alice";
+        }
+        return "Bob";
+    }
+    
+    
+    int take(int left,int right,vector<int> &store,int t,vector<int>& stoneValue){
+        if(left==right){
+            return 0;
+        }
+        int index=left*10000+right;
+        int a=0,b=0;
+
+        if(store[index-1]==0){
+            a-=take(left,right-1,store,0,stoneValue);
+            a+=stoneValue[right];
+        }
+        else{
+            a=-store[index-1];
+            a+=stoneValue[right];
+        }
+
+        if(store[index+10000]==0){
+            b-=take(left+1,right,store,0,stoneValue);
+            b+=stoneValue[left];
+        }
+        else{
+            b=-store[index+10000];
+            b+=stoneValue[left];
+        }
+        
+        if(b>=a){ 
+            store[index]=b;
+            return b;
+        }
+        else{
+            store[index]=a;
+            return a;
+        }
+            
+            
+        
+        return 0;
+    }
+    
+};

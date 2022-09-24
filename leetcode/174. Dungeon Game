@@ -1,0 +1,66 @@
+class Solution {
+public:
+    int calculateMinimumHP(vector<vector<int>>& dungeon) {
+        vector<vector<int>> store;
+        for(int i=0;i<dungeon.size();i++){
+             vector<int>k;
+             for(int j=0;j<dungeon[0].size();j++){
+                 k.push_back(-10000);
+             }
+             store.push_back(k);
+        }
+        int k=cal(store,dungeon,0,0,dungeon.size(),dungeon[0].size());
+        if(k>0){
+            return 1;
+        }
+        return 1-k;
+    }
+    
+    int cal(vector<vector<int>>&store, vector<vector<int>>& dungeon,int x,int y,int xsize,int ysize){
+        if(x==xsize-1&&y==ysize-1){
+            if(dungeon[x][y]<0){
+                return dungeon[x][y];
+            }
+            return 0;
+        }
+        int a=-10000,b=-10000;
+        if(store[x][y]!=-10000){
+            return store[x][y];
+        }
+        if(x+1<xsize){
+            // if(store[x][y]==-10000){
+                a=cal(store,dungeon,x+1,y,xsize,ysize);
+            //     // store[x][y]=a;
+            // }
+            // else{
+                // a=store[x][y];
+            // } 
+        }
+        if(y+1<ysize){
+            // if(store[x][y]==-10000){
+                b=cal(store,dungeon,x,y+1,xsize,ysize);
+            //     // store[x][y]=b;
+            // }
+            // else{
+                // b=store[x][y];
+            // }
+        }
+        
+        if(a>b){
+            if(a+dungeon[x][y]>0){
+                store[x][y]=0;
+                return 0;
+            }
+            store[x][y]=a+dungeon[x][y];
+            return a+dungeon[x][y];
+        }
+        if(b+dungeon[x][y]>0){
+            store[x][y]=0;
+            return 0;
+        }
+        store[x][y]=b+dungeon[x][y];
+        return b+dungeon[x][y];
+    }
+    
+    
+};

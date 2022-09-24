@@ -1,0 +1,57 @@
+class Solution {
+public:
+    vector<int> canSeePersonsCount(vector<int>& heights) {
+        int hsize=heights.size();
+        vector <int> stack;
+        vector <int> out;
+        out.push_back(0);
+        stack.push_back(heights[hsize-1]);
+        int index=hsize-2;
+        while(index!=-1){
+            int temp=stack.size();
+            while(stack.size()!=0){
+                if(heights[index]>stack[stack.size()-1]){
+                    stack.pop_back();
+                }
+                else{
+                    break;
+                }
+            }
+            if(temp!=stack.size()){
+                if(stack.size()==0){
+                    out.push_back(temp);
+                }
+                else{
+                    out.push_back(temp-stack.size()+1);
+                }
+                
+            }
+            else{
+                out.push_back(1);
+            }
+            stack.push_back(heights[index]);
+            index--;
+        }
+        reverse(out.begin(),out.end());
+        return out;    
+        
+        
+//         vector<int> out;
+//         for(int i=0;i<heights.size();i++){
+//             int temp=0;
+//             int sum=0;
+//             for(int j=i+1;j<heights.size();j++){
+//                 if(heights[j]>temp){
+//                     temp=heights[j];
+//                     sum++;
+//                     if(heights[i]<temp){
+//                         break;
+//                     }
+                    
+//                 }
+//             }
+//             out.push_back(sum);
+//         }
+//         return out;
+    }
+};

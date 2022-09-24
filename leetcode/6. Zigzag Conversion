@@ -1,0 +1,39 @@
+class Solution {
+public:
+    string convert(string s, int numRows) {
+        int sl=s.length();
+        if(numRows==1){
+            return s;
+        }    
+        int p=2*numRows-2;
+        int last=sl%p;
+        int ast=last;
+        int ro=sl/p;
+        string output=s;
+        int temp=0;
+        for(int i=0;i<numRows;i++){
+            for(int j=0;j<ro;j++){
+                output[temp]=s[j*p+i];
+                temp+=1;
+                if(i!=0&&i!=numRows-1){
+                    if(j*p+p-1-(i-1)<sl){
+                        output[temp]=s[j*p+p-i];
+                        temp+=1;
+                    }   
+                }  
+            }
+            if(last>0){
+                output[temp]=s[p*ro+i];
+                last-=1;
+                temp+=1;
+                if(i>=(numRows-1)-(ast-numRows)&&ast>numRows){
+                    output[temp]=s[p-i+ro*p];
+                    temp+=1;
+                }   
+            }
+        }
+        return output;
+        
+            
+    }
+};

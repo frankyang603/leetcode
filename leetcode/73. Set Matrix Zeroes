@@ -1,0 +1,21 @@
+class Solution {
+public:
+    void setZeroes(vector<vector<int>>& matrix) {
+        vector<vector<int>> newm=matrix; 
+        
+        int size1=matrix.size();
+        int size2=matrix[0].size();
+        for(int i=0;i<size1;i++){
+            for(int j=0;j<size2;j++){
+                if(newm[i][j]==0){
+                    for(int t=0;t<size2;t++){
+                        matrix[i][t]=0;
+                    }
+                    for(int t=0;t<size1;t++){
+                        matrix[t][j]=0;
+                    }
+                }
+            }
+        }
+    }
+};

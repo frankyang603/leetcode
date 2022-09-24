@@ -1,0 +1,89 @@
+class Solution {
+public:
+   
+    int Partition(vector<long int>&arr, int front, int end){
+        int pivot = arr[end];
+        int i = front -1;
+        for (int j = front; j < end; j++) {
+            if (arr[j] < pivot) {
+                i++;
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;        
+            }
+        }
+        i++;
+        int temp = arr[i];
+        arr[i] = arr[end];
+        arr[end] = temp;  ;
+        return i;
+    }
+    void QuickSort(vector<long int>&arr, int front, int end){
+        if (front < end) {
+            int pivot = Partition(arr, front, end);
+            QuickSort(arr, front, pivot - 1);
+            QuickSort(arr, pivot + 1, end);
+        }
+    }
+    vector<double> medianSlidingWindow(vector< int>& nums, int k) {
+        vector<double>ans;
+        long double out;
+        vector <long int> put;
+        for(int m=0;m<k;m++){
+            put.push_back(nums[m]);
+        } 
+        for(int i=0;i<nums.size()-k+1;i++){
+                    
+            if(i==0){
+                // QuickSort (put,0,k-1);
+                for(int j=0;j<k-1;j++){
+                    for(int h=0;h<k-1;h++){
+                        if(put[h]>put[h+1]){
+                            int temp;
+                            temp=put[h];
+                            put[h]=put[h+1];
+                            
+                            put[h+1]=temp;
+                        }
+                    }
+                }
+            }
+            else{
+                int find=nums[i-1];
+                int add=nums[i+k-1];
+                for(int p=0;p<k;p++){
+                    if(find == put[p]){
+                        put.erase(put.begin()+p);
+                        break;
+                    }
+                }
+                // ans.push_back(add);
+                int te=0;
+                for(int n=0;n<k-1;n++){     
+                    if(add<put[n]){
+                        put.insert(put.begin()+n,add);
+                        te=1;
+                        break;
+                    }  
+                    
+               }
+                if(te==0){
+                    put.push_back(add);
+                }
+            }
+            // ans.push_back(put[0]);
+            // ans.push_back(put[1]);
+            // ans.push_back(put[2]);
+            if(k%2==1){
+                out=put[k/2];
+                
+            }
+            if(k%2==0){
+                out=put[k/2]+put[k/2-1];
+                out=out/2.0;
+            }
+            ans.push_back(out);
+        }
+        return ans;
+    }
+};

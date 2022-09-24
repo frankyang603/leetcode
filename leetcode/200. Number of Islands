@@ -1,0 +1,49 @@
+class Solution {
+public:
+    int numIslands(vector<vector<char>>& grid) {
+        vector<vector<int>> store;
+        int xsize=grid[0].size();
+        int ysize=grid.size();
+        for(int i=0;i<ysize;i++){
+            vector<int>temp;
+            for(int j=0;j<xsize;j++){
+                temp.push_back(-1);
+            }
+            store.push_back(temp);
+        }
+        int k=0;
+        for(int i=0;i<ysize;i++){
+            for(int j=0;j<xsize;j++){
+                if(store[i][j]==-1&&grid[i][j]-49==0){
+                    find(k,store,grid,i,j,xsize,ysize);
+                    k++;
+                }
+                
+            }
+        }
+        return k;
+    }
+    void find(int p,vector<vector<int>> &store, vector<vector<char>>& grid,int x,int y,int xsize,int ysize){
+        if(grid[x][y]-48==0){
+            return; 
+        }
+        
+        if(store[x][y]!=-1){
+            return;
+        }
+        store[x][y]=p;
+        if(x+1<ysize){
+            find(p,store,grid,x+1,y,xsize,ysize);
+        }
+        if(y+1<xsize){
+            find(p,store,grid,x,y+1,xsize,ysize);
+        }
+        if(x-1>=0){
+            find(p,store,grid,x-1,y,xsize,ysize);
+        }
+        if(y-1>=0){
+            find(p,store,grid,x,y-1,xsize,ysize);
+        }
+    }
+    
+};

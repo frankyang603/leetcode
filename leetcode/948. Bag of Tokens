@@ -1,0 +1,42 @@
+class Solution {
+public:
+    int bagOfTokensScore(vector<int>& tokens, int power) {
+        if(tokens.size()==0){
+            return 0;
+        }
+        sort(tokens.begin(),tokens.end());
+        int sum=0;
+        int out=0;
+        int left=0,right=tokens.size()-1;
+        if(power>=tokens[left]){
+            power=power-tokens[left];
+            left+=1;
+            sum++;
+            if(sum>out){
+                out=sum;
+            }
+        }
+        else{
+            return 0;
+        }
+        while(left<=right){
+            if(power>=tokens[left]){
+                power=power-tokens[left];
+                left+=1;
+                sum++;
+                if(sum>out){
+                    out=sum;
+                }
+            }
+            else{
+                sum--;
+                power=power+tokens[right];
+                right-=1;
+            }
+            if(left>right){
+                break;
+            }
+        }
+        return out;
+    }
+};

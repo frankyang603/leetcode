@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int singleNumber(vector<int>& nums) {
+        int a[60003];
+        for(int i=1;i<=60002;i++){
+            a[i]=0;
+        }
+        for(int i=1;i<=nums.size();i++){
+            nums[i-1]+=30000;
+            a[nums[i-1]]+=1;
+        }
+        for(int i=1;i<=60002;i++){
+            if(a[i]==1){
+                return i-30000;
+            }
+        }
+        return 0;
+    }
+};

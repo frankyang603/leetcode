@@ -1,0 +1,96 @@
+class Solution {
+public:
+    string stoneGameIII(vector<int>& stoneValue) {
+        vector<int> store;
+        for(int i=0;i<stoneValue.size()+3;i++){
+            store.push_back(0);
+        }
+        int h=take(store,0,stoneValue,0);
+        
+        if(h==0){
+            return "Tie";
+        }
+        if(h>0){
+            return "Alice";
+        }
+        return "Bob";
+    }
+    
+    
+    int take(vector<int> &store,int t,vector<int>& stoneValue,int index){
+       
+        if(index==stoneValue.size()-1){
+            return stoneValue[index];
+        }
+        if(index>stoneValue.size()-1){
+            return 0;
+        }
+
+        int a=0,b=0,c=0;
+
+        if(store[index+1]==0){
+            a-=take(store,0,stoneValue,index+1);
+            a+=stoneValue[index];
+            // store[index+1]=a;
+        }
+        else{
+            a=-store[index+1];
+            a+=stoneValue[index];
+        }
+
+        if(store[index+2]==0){
+            b-=take(store,0,stoneValue,index+2);
+            if(index+1<=stoneValue.size()-1){
+                b+=stoneValue[index+1];
+            }
+            b+=stoneValue[index];
+            // store[index+2]=b;
+        }
+        else{
+            b=-store[index+2];
+            // b-=take(store,0,stoneValue,index+2);
+            if(index+1<=stoneValue.size()-1){
+                b+=stoneValue[index+1];
+            }
+            b+=stoneValue[index];
+        }
+
+        if(store[index+3]==0){
+            c-=take(store,0,stoneValue,index+3);
+            c+=stoneValue[index];
+            if(index+1<=stoneValue.size()-1){
+                c+=stoneValue[index+1];
+            }
+            if(index+2<=stoneValue.size()-1){
+                c+=stoneValue[index+2];
+            }
+            // store[index+3]=c;
+        }
+        else{
+            c=-store[index+3];
+            c+=stoneValue[index];
+            if(index+1<=stoneValue.size()-1){
+                c+=stoneValue[index+1];
+            }
+            if(index+2<=stoneValue.size()-1){
+                c+=stoneValue[index+2];
+            }
+        }
+        if(c>=b&&c>=a){
+            store[index]=c;
+            return c;
+        }
+        if(b>=c&&b>=a){ 
+            store[index]=b;
+            return b;
+        }
+        if(a>=b&&a>=c){
+            store[index]=a;
+            return a;
+        }
+            
+            
+        
+        return 0;
+    }
+};

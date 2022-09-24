@@ -1,0 +1,39 @@
+class Solution {
+public:
+    int reverse(int x) {
+        
+        if(x==-2147483648){
+            return 0; 
+        }
+        int t=x;
+        if(x<0){
+            x=-x;
+        }
+        
+        string a=to_string(x);
+        string re;
+        string comp="2147483648";
+        int de=0;
+        if(x>1000000000||x<-1000000000){
+            for(int i=9;i>=0,de==0;i--){
+                if(a[i]>comp[9-i]){
+                    return 0;
+                }
+                if(a[i]<comp[9-i]){
+                    de=1;
+                }
+            }
+        }
+        
+        
+        for(int i=0;i<a.length();i++){
+            re[i]=a[a.length()-i-1];
+        }
+        int out;
+        out=stoi(re);
+        if(t<0){
+           return -out; 
+        }
+        return out;
+    }
+};

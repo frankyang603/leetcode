@@ -1,0 +1,39 @@
+class Solution {
+public:
+    int jump(vector<int>& nums) {
+        int h=nums.size();
+        vector<int> store;
+        int max=*max_element(nums.begin(), nums.end());
+        if(h==1){
+            return 0;
+        }
+        for(int i=0;i<h+max;i++){
+            store.push_back(0);
+        }
+        int k=jump(store,nums,0);
+        return k-1;
+        
+    }
+    int jump(vector<int>& store,vector<int>& nums,int index){
+        // num+=1;
+        if(index>=nums.size()-1){
+            return 1;
+        } 
+        int n=nums[index];  
+        int temp=10000000;
+        for(int i=n;i>=1;i--){
+            int a;
+            if(store[index+i]==0){
+                a=jump(store,nums,index+i);
+                store[index+i]=a;
+            }
+            else{
+                a=store[index+i];
+            }
+            if(temp>a){
+                temp=a;
+            }
+        }
+        return temp+1;
+    }
+};

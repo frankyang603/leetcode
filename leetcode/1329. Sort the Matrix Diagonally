@@ -1,0 +1,50 @@
+class Solution {
+public:
+    vector<vector<int>> diagonalSort(vector<vector<int>>& mat) {
+        int ysize=mat.size();
+        int xsize=mat[0].size();
+        int e=0;
+        if(ysize>xsize){
+            e=xsize;
+        }
+        else{
+            e=ysize;
+        }
+        if(ysize==1||xsize==1){
+            return mat;
+        }
+        for(int j=ysize-1;j>=0;j--){
+            vector<int>temp;
+            int b=0;
+            for(int h=j;h<=ysize-1&&b<=xsize-1;h++){
+                temp.push_back(mat[h][b]);
+                b++;
+            }
+            sort(temp.begin(),temp.end());
+            b=0;
+            for(int h=j;h<=ysize-1&&b<=xsize-1;h++){
+                mat[h][b]=temp[b];
+                b++;
+            }
+        }
+        for(int j=1;j<xsize;j++){
+            vector<int>temp;
+            int b=0;
+            for(int h=j;h<=xsize-1&&b<=ysize-1;h++){
+                temp.push_back(mat[b][h]);
+                b++;
+            }
+            sort(temp.begin(),temp.end());
+            b=0;
+            for(int h=j;h<=xsize-1&&b<=ysize-1;h++){
+                mat[b][h]=temp[b];
+                b++;
+            }
+        }
+        
+        
+        return mat;
+        
+        
+    }
+};

@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        int max=*max_element(nums.begin(),nums.end());
+        int min=*min_element(nums.begin(),nums.end());
+        vector<int> store;
+        for(int i=0;i<=max-min;i++){
+            store.push_back(0);
+        }
+        for(int i=0;i<nums.size();i++){
+            store[nums[i]-min]++;
+        }
+        int temp=0;
+        int index=0;
+        for(int i=0;i<=max-min;i++){
+            if(temp<store[i]){
+                temp=store[i];
+                index=i;
+            }
+        }
+        return index+min;
+    }
+};

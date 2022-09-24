@@ -1,0 +1,98 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+
+
+
+
+class Solution {
+public:
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        ListNode *out,*now;
+        out =new ListNode();
+        now=out;
+        int carry=0;
+        while(l1||l2){
+            int a,b;
+            ListNode* temp;
+            temp= new ListNode();
+            if(!l2){
+                b=0;
+            }
+            else{
+                b=l2->val;
+            }
+            if(!l1){
+                a=0;
+            }
+            else{
+                a=l1->val;
+            }
+            if(a+b+carry>=10){
+                temp->val=a+b+carry-10;
+                carry=1;
+            }
+            else{
+                temp->val=a+b+carry; 
+                carry=0;
+            }
+            now->next=temp;
+            now=now->next;
+            if(l1){
+                l1=l1->next;
+            }
+            if(l2){
+                l2=l2->next;
+            }
+            
+        }
+        if(carry==1){
+            ListNode* temp;
+            temp= new ListNode();
+            temp->val=1;
+            now->next=temp;
+        }
+        return out->next;
+        
+        
+//         long long int i=1;
+//         long long int sum1=0,sum2=0;
+//         for(;l1;l1=l1->next){
+//             sum1+=i*l1->val;
+//             i*=10;
+//         }
+//         i=1;
+//         for(;l2;l2=l2->next){
+//             sum2+=i*l2->val;
+//             i*=10;
+//         }
+        
+//         long long int sum=sum1+sum2;
+//         ListNode *out,*now;
+//         out =new ListNode();
+//         now=out;
+//         out->val=sum%10;
+//         sum=sum/10;
+//         // now=now->next;
+//         // return out;
+//         while(sum>0){
+           
+//             ListNode* temp;
+//             temp= new ListNode();
+//             temp->val=sum%10;
+            
+//             temp->next=NULL;
+//             now->next=temp;
+//             now=now->next;
+//             sum=sum/10;
+//         }
+//         return out;
+    }
+};

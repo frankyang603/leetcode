@@ -1,0 +1,68 @@
+class Solution {
+public:
+    int lastStoneWeight(vector<int>& stones) {
+        if(stones.size()==1){
+            return stones[0];
+        }
+        if(stones.size()==2){
+            if(stones[0]>stones[1]){
+                return stones[0]-stones[1];
+            }
+            else{
+                return stones[1]-stones[0];
+            }
+        }
+        
+        while(stones.size()>1){
+            
+            int large,second,index1,index2;
+            if(stones[0]>stones[1]){
+                large=stones[0];
+                second=stones[1];
+                index1=0;
+                index2=1;
+            }
+            else{
+                large=stones[1]; 
+                second=stones[0];
+                index1=1;
+                index2=0;
+            }
+            
+            for(int i=2;i<stones.size();i++){
+                if(stones[i]>=large){
+                    second=large;
+                    large=stones[i];
+                    
+                    index2=index1;
+                    index1=i;
+                }
+                else if(stones[i]>=second){
+                    second=stones[i];
+                    index2=i;
+                }
+                
+            }
+            int m=large-second;
+            if(index1>index2){
+                stones.erase(stones.begin()+index1);
+                stones.erase(stones.begin()+index2);
+            }
+            else{
+                stones.erase(stones.begin()+index1);
+                stones.erase(stones.begin()+index2-1);
+            }
+            if(m!=0){
+                stones.push_back(m);
+            }
+            
+        }
+        if(stones.size()==1){
+            return stones[0];
+        }
+        return 0;
+        
+        
+        
+    }
+};

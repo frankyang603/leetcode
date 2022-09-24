@@ -1,0 +1,28 @@
+class Solution {
+public:
+    vector<vector<int>> largestLocal(vector<vector<int>>& grid) {
+        vector<vector<int>> a;
+        int s=grid.size();
+        for(int i=0;i<s-2;i++){
+            vector<int>in;
+            vector<int>temp;
+            for(int h=0;h<3;h++){
+                for(int b=i;b<i+3;b++){
+                   temp.push_back(grid[b][h]); 
+                }
+            }
+            in.push_back(*max_element(temp.begin(),temp.end()));    
+            for(int j=1;j<s-2;j++){
+                for(int m=0;m<3;m++){
+                    temp.erase(temp.begin());   
+                }
+                for(int m=i;m<i+3;m++){
+                    temp.push_back(grid[m][j+2]);
+                }
+                in.push_back(*max_element(temp.begin(),temp.end()));   
+            }
+            a.push_back(in);
+        }
+        return a;
+    }
+};

@@ -1,0 +1,36 @@
+class Solution {
+vector<vector<int>> out;
+public:
+    vector<vector<int>> subsets(vector<int>& nums) {
+        int h=nums.size()/2;
+        for(int i=0;i<=h;i++){
+            cal(i,0,nums,0,nums.size()-1,-1);
+        } 
+        return out;
+    }   
+    
+    void cal(int goal,int n,vector<int> nums, int left, int right,int t){
+        if(goal==n){
+            vector<int> temp2;
+            for(int i=0;i<n;i++){
+                temp2.push_back(nums[i]);
+            }
+            out.push_back(temp2);
+            if(n==nums.size()/2&&nums.size()%2==0){
+                return;
+            }
+            vector<int> temp;
+            for(int i=n;i<nums.size();i++){
+                temp.push_back(nums[i]);
+            }
+            out.push_back(temp);
+            return;
+        }
+        for(int i=left;i<=right;i++){
+            swap(nums[left],nums[i]);
+            if(t<i){
+                cal(goal,n+1,nums,left+1,right,i);
+            }
+        }
+    } 
+};

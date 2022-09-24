@@ -1,0 +1,32 @@
+class Solution {
+public:
+    int uniquePaths(int m, int n) {
+        if(m<n){
+            int temp=0;
+            temp=m;
+            m=n;
+            n=temp;
+        }
+        int h=m+n-2;//33
+        int k=n-1;//22
+        long long int ans=1;
+        long long int kk=1;
+        vector<int>kkk;
+        for(int i=2;i<=m-1;i++){
+            kkk.push_back(i);
+        }
+        for(int i=k+1;i<=h;i++){
+            ans*=i;
+            for(int j=0;j<kkk.size();j++){
+                if(ans%kkk[j]==0){
+                    ans/=kkk[j];
+                    kkk.erase(kkk.begin()+j);
+                }
+            }    
+        }
+        
+        return ans/kk;
+        
+        
+    }
+};

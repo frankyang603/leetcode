@@ -1,0 +1,66 @@
+class Solution {
+public:
+    string intToRoman(int num) {
+        int array[13]={1000,900,500,400,100,90,50,40,10,9,5,4,1};
+        int ss[1000];
+        int nows=0;
+        int now=0;
+        string s="";
+        while(now!=13){
+            // s+="m";
+            while(num>=array[now]){
+                // s+="a";
+                num=num-array[now];
+                ss[nows]=now;
+                nows+=1;
+            }
+            now+=1;
+        }
+        for(int i=0;i<nows;i++){
+            // s+="m";
+            switch(ss[i]){
+                case 0:
+                    s+="M";
+                    break;
+                case 1:
+                    s+="CM";
+                    break;
+                case 2:
+                    s+="D";
+                    break;
+                case 3:
+                    s+="CD";
+                    break;
+                case 4:
+                    s+="C";
+                    break;
+                case 5:
+                    s+="XC";
+                    break;
+                case 6:
+                    s+="L";
+                    break;
+                case 7:
+                    s+="XL";
+                    break;
+                case 8:
+                    s+="X";
+                    break;
+                case 9:
+                    s+="IX";
+                    break;
+                case 10:
+                    s+="V";
+                    break;
+                case 11:
+                    s+="IV";
+                    break;
+                case 12:
+                    s+="I";
+                    break;
+            }
+        } 
+        return s;
+    }
+   
+};

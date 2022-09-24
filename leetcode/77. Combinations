@@ -1,0 +1,31 @@
+class Solution {
+vector<vector<int>> out;   
+public:
+    vector<vector<int>> combine(int n, int k) {
+        vector<int>store;
+        for(int i=1;i<=n;i++){
+            store.push_back(i);
+        }
+        find(store,k,0,n-1,0,-1);
+        return out;
+    }
+    
+    void find(vector<int> store,int k,int left,int right,int n,int t){
+        if(k==n){
+            vector<int>temp;
+            for(int i=0;i<k;i++){
+                temp.push_back(store[i]);
+            }
+            out.push_back(temp);
+            return;
+        }
+        for(int i=left;i<=right;i++){
+            swap(store[left],store[i]);
+            if(i>t){
+                find(store,k,left+1,right,n+1,i);
+            }
+        }
+    }
+    
+    
+};

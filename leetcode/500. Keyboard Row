@@ -1,0 +1,75 @@
+class Solution {
+public:
+    vector<string> findWords(vector<string>& words) {
+        
+        
+        vector <string> ans;
+        for(int h=0;h<words.size();h++){
+            string a="qwertyuiop";
+            string b="asdfghjkl";
+            string c="zxcvbnm";
+            int aa=0;
+            for(int i=0;i<words[h].length();i++){
+                int t=0;
+                for(int j=0;j<10;j++){
+                    if((char)tolower(words[h][i])==a[j]){
+                        t=1;
+                        break;
+                    }
+                }
+                if(t==0){
+                    break;
+                }
+                if(i==words[h].length()-1){
+                    aa=1;
+                }
+            }
+            if(aa==1){
+                ans.push_back(words[h]);
+                continue;
+            }
+            for(int i=0;i<words[h].length();i++){
+                int t=0;
+                for(int j=0;j<9;j++){
+                    if((char)tolower(words[h][i])==b[j]){
+                        t=1;
+                        break;
+                    }
+                }
+                if(t==0){
+                    break;
+                }
+                if(i==words[h].length()-1){
+                    aa=1;
+                }
+            }
+            if(aa==1){
+                ans.push_back(words[h]);
+                continue;
+            }
+            for(int i=0;i<words[h].length();i++){
+                int t=0;
+                for(int j=0;j<7;j++){
+                    if((char)tolower(words[h][i])==c[j]){
+                        t=1;
+                        break;
+                    }
+                }
+                if(t==0){
+                    break;
+                }
+                if(i==words[h].length()-1){
+                    aa=1;
+                }
+            }
+            if(aa==1){
+                ans.push_back(words[h]);
+                continue;
+            }
+
+        }
+        
+        return ans;    
+        
+    }
+};

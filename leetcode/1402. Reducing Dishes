@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int maxSatisfaction(vector<int>& satisfaction) {
+        sort(satisfaction.begin(),satisfaction.end());
+        int sum=0;
+        int s=satisfaction.size();
+        for(int i=0;i<s;i++){
+            int temp=0;
+            for(int j=0;j<satisfaction.size();j++){
+               temp+=satisfaction[j]*(j+1); 
+            }
+            if(temp>sum){
+                sum=temp;
+            }
+            satisfaction.erase(satisfaction.begin());
+        }
+        return sum;
+    }
+};

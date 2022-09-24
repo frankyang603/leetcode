@@ -1,0 +1,35 @@
+class Solution {
+public:
+    int numberOfWeakCharacters(vector<vector<int>>& properties) {
+        vector<pair<int,int>>v;
+        for(int i=0;i<properties.size();i++){
+            pair<int,int>temp(properties[i][0],properties[i][1]);
+            v.push_back(temp);
+        }
+        sort(v.begin(),v.end(),compare);
+        // for(int i=0;i<properties.size();i++){
+        //     cout<<v[i].first<<" "<<v[i].second<<"\n";
+        // }
+        
+        stack <int> s;
+        s.push(v[0].second);
+        for(int i=1;i<properties.size();i++){
+            while(v[i].second>s.top()){
+                s.pop();
+                if(s.empty()){
+                    break;
+                }
+            }
+            s.push(v[i].second);
+        }
+        return properties.size()-s.size();
+    }
+    
+    static bool compare(const pair<int,int> &v1,const pair<int,int> &v2){
+        if(v1.first==v2.first){
+            return v2.second<v1.second;
+        }
+        return v1.first<v2.first;
+    }
+        
+};

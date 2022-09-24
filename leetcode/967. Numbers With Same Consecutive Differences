@@ -1,0 +1,36 @@
+class Solution {
+vector<vector<int>>out;
+public:
+    vector<int> numsSameConsecDiff(int n, int k) {
+        vector<int>temp;
+        for(int i=1;i<=9;i++){
+            temp.push_back(i);
+        }
+        out.push_back(temp);
+        find(0,n,k);
+        return out[n-1];
+    }
+    void find(int n,int goal,int k){
+        if(n==goal-1){
+            return;
+        }
+        vector<int> temp;
+        for(int i=0;i<out[n].size();i++){
+            if(k==0){
+                if(out[n][i]%10+k<=9){
+                    temp.push_back(out[n][i]*10+out[n][i]%10+k);
+                }
+            }
+            else{
+                if(out[n][i]%10+k<=9){
+                    temp.push_back(out[n][i]*10+out[n][i]%10+k);
+                }
+                if(out[n][i]%10-k>=0){
+                    temp.push_back(out[n][i]*10+out[n][i]%10-k);
+                }
+            }
+        }
+        out.push_back(temp);
+        find(n+1,goal,k);     
+    }
+};

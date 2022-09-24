@@ -1,0 +1,37 @@
+class Solution {
+public:
+    bool winnerSquareGame(int n) {
+        
+        vector<int>store;
+        for(int i=0;i<n;i++){
+            store.push_back(-1);
+        }
+        return cal(store,n);
+    }
+    
+    int cal( vector<int> &store,int n){
+        if(n==0){
+            return 0;
+        }
+        int temp=n;
+        for(int i=1;i*i<=temp;i++){
+            int a;
+            if(store[n-i*i]==-1){
+                a=cal(store,n-i*i);
+                store[n-i*i]=a;
+            }
+            else{
+                a=store[n-i*i];
+            }
+            if(a==0){
+                return 1;
+            }
+        }
+        return 0;
+        
+        
+        
+    }
+    
+    
+};
